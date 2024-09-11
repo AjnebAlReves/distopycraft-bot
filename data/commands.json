@@ -1,0 +1,84 @@
+[
+  {
+    "name": "info",
+    "description": "Provee información de lo solicitado.",
+    "options": []
+  },
+  {
+    "name": "ai",
+    "description": "🤖 Habla con la IA de DistopyCraft.",
+    "options": [
+      {
+        "type": 3,
+        "name": "prompt",
+        "description": "🤖 Ingresa lo que le quieres preguntar a la IA.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "name": "ban",
+    "description": "Banea a un usuario",
+    "options": [
+      {
+        "name": "target",
+        "description": "Usuario a Banear",
+        "required": true,
+        "type": 6
+      },
+      {
+        "type": 4,
+        "name": "duration",
+        "description": "Duración del Baneo (en segundos)",
+        "required": true
+      },
+      {
+        "type": 3,
+        "name": "reason",
+        "description": "Razon del Baneo",
+        "required": false
+      },
+      {
+        "name": "silent",
+        "description": "Silenciar el mensaje de baneo?",
+        "required": false,
+        "type": 5
+      }
+    ]
+  },
+  {
+    "name": "timeout",
+    "description": "Aisla temporalmente a un usuario",
+    "options": [
+      {
+        "name": "target",
+        "description": "Usuario a Aislar",
+        "required": true,
+        "type": 6
+      },
+      {
+        "type": 3,
+        "name": "duration",
+        "description": "Duración del Aislamiento (en segundos)",
+        "required": true
+      },
+      {
+        "type": 3,
+        "name": "reason",
+        "description": "Razon del Aislamiento",
+        "required": false
+      },
+      {
+        "name": "silent",
+        "description": "Silenciar el mensaje de aislamiento?",
+        "required": false,
+        "type": 5
+      }
+    ]
+  },
+  {
+    "name": "estado",
+    "description": "Proporciona información sobre el estado del servidor de Minecraft.",
+    "options": []
+  }
+]
