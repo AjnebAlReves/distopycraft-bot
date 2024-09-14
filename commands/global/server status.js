@@ -13,7 +13,7 @@ module.exports = {
         }
         const data = r.data;
         const embed = new EmbedBuilder()
-            .setColor(0x0099FF)
+            .setColor('DarkRed')
             .setTitle('DistopyCraft Network | Estado del servidor')
             .setURL('https://mc.distopycraft.com')
             .setDescription(`**Estado:** ${data.online ? 'Encendido' : 'Apagado'}\n**Jugadores:** ${data.players.online}/${data.players.max}\n**IP DEL SERVIDOR:**\n\`\`\`\nmc.distopycraft.com\n\`\`\``)

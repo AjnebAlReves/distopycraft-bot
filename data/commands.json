@@ -1,7 +1,7 @@
 [
   {
     "name": "info",
-    "description": "Provee información de lo solicitado.",
+    "description": "Provee información general del usuario y el servidor actual.",
     "options": []
   },
   {
@@ -59,7 +59,7 @@
       {
         "type": 3,
         "name": "duration",
-        "description": "Duración del Aislamiento (en segundos)",
+        "description": "Duracion del Aislamiento. Ejemplo: 1d1h10m30s",
         "required": true
       },
       {

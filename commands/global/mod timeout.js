@@ -10,7 +10,7 @@ module.exports = {
             .setRequired(true))
         .addStringOption(option => option
             .setName('duration')
-            .setDescription('Duración del Aislamiento (en segundos)')
+            .setDescription('Duracion del Aislamiento. Ejemplo: 1d1h10m30s')
             .setRequired(true))
         .addStringOption(option => option
             .setName('reason')

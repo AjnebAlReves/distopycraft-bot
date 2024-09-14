@@ -2,7 +2,7 @@ const { Events, EmbedBuilder } = require('discord.js');
 const config = require('../../data/config');
 const path = require('node:path');
 const fs = require('node:fs');
-const { generateAIResponse } = require('../../data/ai');
+const { generateAIResponse } = require('../../functions/ai');
 
 module.exports = {
 	name: Events.MessageCreate,
