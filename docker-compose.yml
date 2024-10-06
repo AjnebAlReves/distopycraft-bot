@@ -1,0 +1,15 @@
+networks:
+  distopycraft:
+    external: true
+
+services:
+  bot:
+    image: node:lts
+    networks:
+      distopycraft:
+        ipv4_address: 172.20.0.100
+    restart: always
+    command: node .
+    working_dir: /app
+    volumes:
+    - ./:/app

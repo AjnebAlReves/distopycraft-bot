@@ -3,6 +3,8 @@ const path = require('node:path');
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const config = require('./data/config');
 const discord_player = require('discord-player');
+const { getStatusEmbed } = require('./functions/minecraft');
+const { time } = require('node:console');
 
 const token = config.bot.token;
 require('dotenv').config();
@@ -36,7 +38,10 @@ const client = new Client({
 		Partials.StageInstance,
 		Partials.GuildVoiceStates,
 	],
-	shards: 'auto'
+	allowedMentions: {
+		parse: ['users', 'roles'],
+		repliedUser: true
+	}
 });
 const player = new discord_player.Player(client);
 client.player = player;
@@ -78,72 +83,73 @@ for (const file of eventFiles) {
 	}
 }
 client.login(token);
-/*
-// Función para revisar el estado del servidor de Minecraft
-async function checkMinecraftServerStatus() {
-	try {
-		// Aquí debes implementar la lógica para verificar el estado del servidor de Minecraft
-		// Por ejemplo, puedes usar una librería como 'minecraft-server-util'
-		console.log('[INFO] Revisando el estado del servidor de Minecraft...');
-		const r = await axios.get('https://api.mcstatus.io/v2/status/java/mc.distopycraft.com');
-		//console.log('[INFO] Respuesta del servidor de Minecraft:', r.data);
-		if (r.data.online) {
-			console.log('[INFO] El servidor de Minecraft está en línea.');
-			// Guardar la respuesta del servidor en un archivo JSON
-			const jsonData = JSON.stringify(responseData, null, 2);
-			const filePath = path.join(__dirname, './data/mc_status.json');
-			fs.writeFileSync(filePath, jsonData);
-			const responseData = {
-				timestamp: new Date().toISOString(),
-				status: r.data.online,
-				players: {
-					online: r.data.players.online,
-					max: r.data.players.max
-				}
-			};
-			const embed = new EmbedBuilder()
-				.setColor(0xff0000) // Rojo
-				.setTitle('Estado del Servidor de Minecraft')
-				.setDescription(`Estado: ${responseData.online}\nJugadores: ${responseData.players.online}/${responseData.players.max}\n**IP DEL SERVIDOR:**\n\`\`\`\nmc.distopycraft.com\n\`\`\``);
-			await client.channels.cache.get(config.bot.channels.status).send({ embeds: [embed] });
 
-			console.log('[INFO] Respuesta del servidor guardada en server_status.json');
+//Función que revisa el estado del servidor cada 2 minutos y actualiza un embed
+async function updateStatusEmbed() {
+	console.log('[INFO] Starting status embed update process');
 
-		} else {
-			console.log('[WARN] El servidor de Minecraft está fuera de línea.');
+	// Load the status database
+	const statusDB = require('./data/database/mc_status.json');
+	console.log('[INFO] Status database loaded');
 
-			const responseData = {
-				timestamp: new Date().toISOString(),
-				status: r.data.online,
-				players: {
-					online: "Servidor apagado",
-					max: " "
-				},
-				messageId: 0
-			};
-			const embed = new EmbedBuilder()
-				.setColor(0xff0000) // Rojo
-				.setTitle('Estado del Servidor de Minecraft')
-				.setDescription(`> **Estado:** ${responseData.online}\n> **Jugadores**: ${responseData.players.online}/${responseData.players.max}\n**IP DEL SERVIDOR:**\n\`\`\`\nmc.distopycraft.com\n\`\`\``);
-			if (!client.messages.cache.get(jsonData.messageId)) {
-				//Obtener ID  del mensaje y guardarlo en el archivo json
-				const message = await client.channels.cache.get(config.bot.channels.status).send({ embeds: [embed] });
-				responseData.messageId = message.id;
-				const jsonData = JSON.stringify(responseData, null, 2);
-				const filePath = path.join(__dirname, './data/mc_status.json');
-				fs.writeFileSync(filePath, jsonData);
-			} else {
-				const jsonData = JSON.stringify(responseData, null, 2);
-				client.channels.cache.get(config.bot.channels.status).edit(client.messages.cache.get(jsonData.messageId).id, { embeds: [embed] });
-				const filePath = path.join(__dirname, './data/mc_status.json');
-				fs.writeFileSync(filePath, jsonData);
-			}
-		}
-	} catch (error) {
-		console.error('[ERROR] Error al revisar el estado del servidor de Minecraft:', error);
+	// Create an empty embed object (to be filled later)
+	const embed = {};
+	console.log('[INFO] Empty embed object created');
+
+	// Fetch the status channel
+	const channel = await client.channels.fetch(config.bot.channels.status);
+	console.log(`[INFO] Status channel fetched: ${channel.name}`);
+
+	// Get the status message ID from the database
+	const statusMessageId = statusDB.message;
+	if (!statusMessageId || statusMessageId === '' || statusMessageId === null || statusMessageId === undefined) {
+		console.log('[ERROR] Status message ID not found in the database');
+	} else {
+		console.log(`[INFO] Status message ID retrieved from database: ${statusMessageId}`);
 	}
+
+	let message;
+
+	try {
+		// Try to fetch the existing message
+		message = await channel.messages.fetch(statusMessageId);
+		console.log('[INFO] Existing status message found');
+	} catch (error) {
+		console.log('[INFO] Existing status message not found, creating a new one');
+		
+		// If the message doesn't exist, create a new one
+		const newStatusMessage = await channel.send({ embeds: [embed] });
+		console.log(`[INFO] New status message created with ID: ${newStatusMessage.id}`);
+
+		// Update the database with the new message ID
+		statusDB.message = newStatusMessage.id;
+		fs.writeFileSync('./data/database/mc_status.json', JSON.stringify(statusDB, null, 2));
+		console.log('[INFO] Database updated with new message ID');
+
+		message = newStatusMessage;
+	}
+
+	// Update the existing message with the new embed
+	await message.edit({ embeds: [embed] });
+	console.log('[INFO] Status message updated with new embed');
+
+	// Prepare data to be written to the database
+	const toJSONDB = {
+		timestamp: Math.floor(new Date().getTime() / 1000),
+		message: statusDB.message,
+		status: false,
+		players: {
+			online: "N/A",
+			max: "N/A"
+		}
+	};
+	console.log('[INFO] Prepared data for database update');
+
+	// Write the updated data to the database
+	fs.writeFileSync('./data/database/mc_status.json', JSON.stringify(toJSONDB, null, 2));
+	console.log('[INFO] Database updated with latest status information');
+
+	console.log('[INFO] Status embed update process completed');
 }
 
-// Iniciar un nuevo hilo para revisar constantemente el estado del servidor de Minecraft
-setInterval(checkMinecraftServerStatus, 60 * 1000); // Revisar cada 5 minutos
-*/
+setInterval(updateStatusEmbed, 1000 * 30);

@@ -1,8 +1,6 @@
 const config = require("../../data/config");
 const axios = require("axios");
 const { Events, EmbedBuilder, AttachmentBuilder } = require("discord.js");
-const { Welcome } = require("niby-welcomes")
-
 module.exports = {
   name: Events.GuildMemberAdd,
   once: true,
@@ -24,34 +22,12 @@ module.exports = {
       `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Sí te gusta el servidor, puedes votar. Usa el comando /vote en el canal de <#${config.bot.channels.commands}>`,
     ];
     let welcomeChannel = member.guild.channels.cache.get(config.bot.channels.welcome);
-    let backgroundUrl = "https://i.imgur.com/CgQl2pt.png";
+    let backgroundUrl = "https://media.discordapp.net/attachments/1066045399435063366/1285742474815340656/CgQl2pt.png?ex=66eb607d&is=66ea0efd&hm=e6821970ae4b1765025d5cd78564231a80afb6d9d5c7eb61c8cd4b1564662a34&=&format=webp&quality=lossless";
     let avatarUrl = member.user.displayAvatarURL({ format: "png", size: 1024 });
 
-    // Cache the background image
-    const imgBuffer = await axios.get(backgroundUrl, { responseType: 'arraybuffer' }, () => {
-      let backgroundImageBuffer = Buffer.from(backgroundUrl, 'binary');
-      if (backgroundImageBuffer) {
-        return backgroundImageBuffer;
-      } else {
-        return null;
-      }
-    });
     if (welcomeChannel) {
-      //CREACIÓN DE BUFFER DE IMAGEN (BIENVENIDA)
-      const welcomeImage = await new Welcome()
-        .setWelcomeMessage("BIENVENID@")
-        .setUsername(member.user.username)
-        .setMemberCount(`Eres el número #${member.guild.memberCount}`)
-        .setAvatar(avatarUrl)
-        .setBackgroundUrl(imgBuffer)
-        .setBorder(true, /*OPCIONAL*/ { color: '#ffffff', size: 20 })
-        .setStyle("koya") //koya, mee6
-        .build();
+      console.log(`El canal ${welcomeChannel.name} existe en ${member.guild.name}`);
     }
-
-    //attachment
-    let attachment = new AttachmentBuilder(welcomeImage, { name: "welcome.png" });
-
     //enviamos el mensaje con la bienvenida
     const serverMembers = member.guild.memberCount;
     const embed = new EmbedBuilder()
@@ -60,11 +36,8 @@ module.exports = {
         `<a:17:1057402422865170602> Contigo somos **${serverMembers} personas**!\n\n<a:14:1057402430347804743> Recuerda invitar a tus amigos al servidor para disfrutar junto a ellos!\n\n👥 Invitado por: ${memberInviter}\n➕ Invitaciones: **${memberInvitedBy.invites}**\n\n**<a:16:1057402424769392650> ¡Disfruta tu estadia!**`
       )
       .setColor("DarkRed")
-      .setImage(attachment)
-      .setFooter({ text: "DistopyCraft" });
-
-    const channel = member.guild.channels.cache.get(config.bot.channels.welcome);
+      .setFooter({ text: "DistopyCraft Network | IP: mc.distopycraft.com" });
     const randomMessage = messageList[Math.floor(Math.random() * messageList.length)];
-    channel.send({ content: randomMessage, embeds: [embed] });
-  },
-};
+    welcomeChannel.send({ content: randomMessage, embeds: [embed] });
+  }
+}

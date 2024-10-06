@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -19,8 +19,8 @@ module.exports = {
         .addBooleanOption(option => option
             .setName('silent')
             .setDescription('Silenciar el mensaje de aislamiento?')
-            .setRequired(false)),
-
+            .setRequired(false))
+        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
     async execute(interaction) {
         const target = interaction.options.getUser('target');
         const reason = interaction.options.getString('reason') || 'No se especifico ninguna razon';

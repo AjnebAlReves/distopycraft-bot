@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,8 +27,8 @@ module.exports = {
         .setName("silent")
         .setDescription("Silenciar el mensaje de baneo?")
         .setRequired(false)
-    ),
-
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
   async execute(interaction, guild) {
     const user = interaction.options.getUser("target");
     const duration = interaction.options.getInteger("duration");
@@ -57,7 +57,7 @@ module.exports = {
       return result.join(', ')
     }
     if (userIsBannable) {
-      if(duration === 0) {
+      if (duration === 0) {
         await interaction.guild.members.ban(user, { reason: reason });
         await interaction.reply({ embeds: [banned], silent: silent });
       } else {
