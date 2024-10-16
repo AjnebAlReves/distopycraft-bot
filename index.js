@@ -1,9 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials, EmbedBuilder } = require('discord.js');
 const config = require('./data/config');
 const discord_player = require('discord-player');
-const { getStatusEmbed } = require('./functions/minecraft');
+const { getStatus } = require('./functions/minecraft');
 const { time } = require('node:console');
 
 const token = config.bot.token;
@@ -84,72 +84,60 @@ for (const file of eventFiles) {
 }
 client.login(token);
 
-//Función que revisa el estado del servidor cada 2 minutos y actualiza un embed
+const webStatus = {
+	forum: {
+		name: 'Foro',
+		url: 'https://distopycraft.com',
+		online: true
+	},
+	store: {
+		name: 'Tienda',
+		url: 'https://tienda.distopycraft.com',
+		online: true
+	}
+};
 async function updateStatusEmbed() {
-	console.log('[INFO] Starting status embed update process');
-
-	// Load the status database
-	const statusDB = require('./data/database/mc_status.json');
-	console.log('[INFO] Status database loaded');
-
-	// Create an empty embed object (to be filled later)
-	const embed = {};
-	console.log('[INFO] Empty embed object created');
-
-	// Fetch the status channel
-	const channel = await client.channels.fetch(config.bot.channels.status);
-	console.log(`[INFO] Status channel fetched: ${channel.name}`);
-
-	// Get the status message ID from the database
-	const statusMessageId = statusDB.message;
-	if (!statusMessageId || statusMessageId === '' || statusMessageId === null || statusMessageId === undefined) {
-		console.log('[ERROR] Status message ID not found in the database');
-	} else {
-		console.log(`[INFO] Status message ID retrieved from database: ${statusMessageId}`);
-	}
-
-	let message;
-
 	try {
-		// Try to fetch the existing message
-		message = await channel.messages.fetch(statusMessageId);
-		console.log('[INFO] Existing status message found');
-	} catch (error) {
-		console.log('[INFO] Existing status message not found, creating a new one');
-		
-		// If the message doesn't exist, create a new one
-		const newStatusMessage = await channel.send({ embeds: [embed] });
-		console.log(`[INFO] New status message created with ID: ${newStatusMessage.id}`);
-
-		// Update the database with the new message ID
-		statusDB.message = newStatusMessage.id;
-		fs.writeFileSync('./data/database/mc_status.json', JSON.stringify(statusDB, null, 2));
-		console.log('[INFO] Database updated with new message ID');
-
-		message = newStatusMessage;
-	}
-
-	// Update the existing message with the new embed
-	await message.edit({ embeds: [embed] });
-	console.log('[INFO] Status message updated with new embed');
-
-	// Prepare data to be written to the database
-	const toJSONDB = {
-		timestamp: Math.floor(new Date().getTime() / 1000),
-		message: statusDB.message,
-		status: false,
-		players: {
-			online: "N/A",
-			max: "N/A"
+		console.log('[INFO] Obteniendo el estado del servidor...');
+		const status = await getStatus();
+		if (!status) {
+			console.log('[WARN] No se pudo obtener el estado del servidor');
+			return;
 		}
-	};
-	console.log('[INFO] Prepared data for database update');
 
-	// Write the updated data to the database
-	fs.writeFileSync('./data/database/mc_status.json', JSON.stringify(toJSONDB, null, 2));
-	console.log('[INFO] Database updated with latest status information');
+		const embed = new EmbedBuilder()
+			.setTitle('DistopyCraft')
+			.setURL('https://distopycraft.com')
+			.setTitle('Estado del servidor')
+			.setDescription(`Próxima actualización: <t:${Math.floor(Date.now() / 1000) + 60}:R>\n\n<a:_:1296177196356075682> **Estados de los Servidores [Total: 3]**\n> ${status.proxy.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **Proxy** (${status.proxy.players.online}/${status.proxy.players.max})\n> ${status.lobby_1.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **Lobby #1:** (${status.lobby_1.players.online}/${status.lobby_1.players.max})\n> ${status.survival_1.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **Survival 1.20:** (${status.survival_1.players.online}/${status.survival_1.players.max})\n\n<a:_:1296177196356075682> **Estado de los sitios web [Total: 2]**\n> ${webStatus.forum.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Foro**](https://distopycraft.com)\n> ${webStatus.store.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Tienda**](https://tienda.distopycraft.com)`)
+			.setImage(`https://api.mcstatus.io/v2/widget/java/mc.distopycraft.com?${Math.random() * 10000000}`)
+			.setFooter({ text: 'DistopyCraft | Se actualiza cada 1 minuto | Última Actualización', iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+			.setColor('DarkRed')
+			.setTimestamp();
 
-	console.log('[INFO] Status embed update process completed');
+		console.log('[INFO] Obteniendo el canal de estado...');
+		const channel = await client.channels.fetch(config.bot.channels.status);
+		console.log(`[INFO] Canal de estado obtenido: #${channel.name}`);
+
+		console.log('[INFO] Obteniendo mensajes del canal...');
+		const message = await channel.messages.fetch({limit: 3})
+			.then(messages => {
+				return messages.first();
+			})
+			.catch(console.error);
+
+		if (!message) {
+			console.log('[INFO] No se encontró ningún mensaje del bot en el canal de estado. Creando uno nuevo...');
+			channel.send({ embeds: [embed] });
+		} else {
+			console.log('[INFO] Actualizando el mensaje del bot en el canal de estado...');
+			message.edit({ embeds: [embed] });
+			console.log('[INFO] Mensaje de estado actualizado.');
+		}
+
+	} catch (error) {
+		console.error('[ERROR] Error al actualizar el embed de estado:', error);
+	}
 }
 
-setInterval(updateStatusEmbed, 1000 * 30);
+setInterval(updateStatusEmbed, 1000 * 60);
