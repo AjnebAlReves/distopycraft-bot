@@ -30,42 +30,42 @@ module.exports = {
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers),
   async execute(interaction, guild) {
-    const user = interaction.options.getUser("target");
-    const duration = interaction.options.getInteger("duration");
-    const userIsBannable = interaction.guild.members.cache.get(user.id).bannable;
-    const reason = interaction.options.getString("reason") || "No hay razon";
-    const silent = interaction.options.getBoolean("silent") || true;
-    const executor = interaction.user;
+  const targetUser = interaction.options.getUser("target");
+  const banDuration = interaction.options.getInteger("duration");
+  const isBannable = interaction.guild.members.cache.get(targetUser.id).bannable;
+  const banReason = interaction.options.getString("reason") || "No hay razón";
+  const isSilent = interaction.options.getBoolean("silent") || true;
+  const executor = interaction.user;
 
-    const banned = new EmbedBuilder()
-      .setTitle("Baneo")
-      .setColor("#ff0000")
-      .setAuthor(executor.tag, executor.displayAvatarURL())
-      .setThumbnail(user.displayAvatarURL())
-      .setDescription(`**Usuario Baneado:** ${user.tag} (${user.id})\n**Razon:** ${reason}\n**Duracion:** ${humanizeDuration(duration)}`)
+  const banEmbed = new EmbedBuilder()
+    .setTitle("Baneo")
+    .setColor("#ff0000")
+    .setAuthor({ name: executor.tag, iconURL: executor.displayAvatarURL() })
+    .setThumbnail(targetUser.displayAvatarURL())
+    .setDescription(`**Usuario Baneado:** ${targetUser.tag} (${targetUser.id})\n**Razón:** ${banReason}\n**Duración:** ${formatDuration(banDuration)}`);
 
-    function humanizeDuration(seconds) {
-      const hours = Math.floor(seconds / 3600)
-      const minutes = Math.floor((seconds % 3600) / 60)
-      const remainingSeconds = seconds % 60
+  function formatDuration(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
 
-      let result = []
-      if (hours > 0) result.push(`${hours} hora${hours > 1 ? 's' : ''}`)
-      if (minutes > 0) result.push(`${minutes} minuto${minutes > 1 ? 's' : ''}`)
-      if (remainingSeconds > 0) result.push(`${remainingSeconds} segundo${remainingSeconds > 1 ? 's' : ''}`)
+    const parts = [];
+    if (hours > 0) parts.push(`${hours} hora${hours > 1 ? 's' : ''}`);
+    if (minutes > 0) parts.push(`${minutes} minuto${minutes > 1 ? 's' : ''}`);
+    if (remainingSeconds > 0) parts.push(`${remainingSeconds} segundo${remainingSeconds > 1 ? 's' : ''}`);
 
-      return result.join(', ')
-    }
-    if (userIsBannable) {
-      if (duration === 0) {
-        await interaction.guild.members.ban(user, { reason: reason });
-        await interaction.reply({ embeds: [banned], silent: silent });
-      } else {
-        await interaction.guild.members.ban(user, { reason: reason, days: duration });
-        await interaction.reply({ embeds: [banned], silent: silent });
-      }
-    } else {
-      await interaction.reply({ content: "No puedo banear a este usuario!", ephemeral: true });
-    }
+    return parts.join(', ');
   }
+
+  if (isBannable) {
+    const banOptions = { reason: banReason };
+    if (banDuration !== 0) {
+      banOptions.days = banDuration;
+    }
+    await interaction.guild.members.ban(targetUser, banOptions);
+    await interaction.reply({ embeds: [banEmbed], ephemeral: isSilent });
+  } else {
+    await interaction.reply({ content: "No puedo banear a este usuario!", ephemeral: true });
+  }
+}
 }

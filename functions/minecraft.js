@@ -3,13 +3,8 @@ const axios = require('axios');
 const userDB = require('../data/database/users.json');
 const protocol = require('minecraft-protocol');
 const util = require('minecraft-server-util');
-
-const servers = {
-    proxy: { name: 'Proxy', host: '172.20.0.2', port: 0 },
-    lobby_1: { name: 'Lobby #1', host: '172.20.0.3', port: 0, password: process.env.LOBBY_RCON_PASSWORD },
-    survival_1: { name: 'Survival 1.20', host: '172.20.0.4', port: 0, password: process.env.SURVIVAL_RCON_PASSWORD },
-};
-
+const { minecraft } = require('../data/config');
+const servers = minecraft;
 async function getStatus() {
     const options = {
         timeout: 1000 * 5, // timeout in milliseconds
@@ -31,7 +26,10 @@ async function getStatus() {
                 port: null,
                 version: null,
                 protocol: null,
-                players: null,
+                players: {
+                    max: null,
+                    online: null
+                },
                 description: null,
                 favicon: null,
                 srvRecord: null,
@@ -50,5 +48,23 @@ async function sendRCONCommand(command, server) {
     await rClient.close();
     return response;
 }
-
+async function getMainServerPing() {
+    const options = {
+        timeout: 1000 * 5, // timeout in milliseconds
+        enableSRV: true // SRV record lookup
+    };
+    try {
+    const status = await util.status('mc.distopycraft.com', 25565, options);
+        response = {
+            ping: status.roundTripLatency,
+            online: true
+        }
+    } catch (err) {
+        console.error(err);
+        response = {
+            ping: null,
+            online: false
+        }
+    }
+}
 module.exports = { getStatus, sendRCONCommand };

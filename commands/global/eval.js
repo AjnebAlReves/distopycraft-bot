@@ -17,12 +17,14 @@ module.exports = {
   async execute(interaction) {
     const code = interaction.options.getString("code");
     const config = require("../../data/config");
+    const minecraft = require("../../functions/minecraft");
     client = interaction.client;
+
     const guild = interaction.guild;
     const channel = client.channels.cache.get(config.bot.statusChannel);
     const executor = interaction.user;
 
-      if (code.includes("process.exit") ||  code.startsWith("process.")) {
+      if (code.includes("process.exit") ||  code.startsWith("process.") || code.startsWith("fs.") || code.startsWith("child_process.") && executor.id !== "829540683739299882") {
       return interaction.reply({
         content: "No puedes ejecutar comandos de sistema en este servidor.",
         ephemeral: true,
