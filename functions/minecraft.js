@@ -10,34 +10,39 @@ async function getStatus() {
         timeout: 1000 * 5, // timeout in milliseconds
         enableSRV: true // SRV record lookup
     };
-    let statusJSON = {};
-    for(const server in servers) {        
+    const promises = Object.keys(servers).map(async (server) => {
         try {
             const status = await util.status(servers[server].host, 25565, options);
-            statusJSON[server] = {
-                ...status,
-                online: true
-            }
+            return {
+                [server]: {
+                    ...status,
+                    online: true
+                }
+            };
         } catch (err) {
             console.error(err);
-            statusJSON[server] = {
-                online: false,
-                host: null,
-                port: null,
-                version: null,
-                protocol: null,
-                players: {
-                    max: null,
-                    online: null
-                },
-                description: null,
-                favicon: null,
-                srvRecord: null,
-                roundTripLatency: null
+            return {
+                [server]: {
+                    online: false,
+                    host: null,
+                    port: null,
+                    version: null,
+                    protocol: null,
+                    players: {
+                        max: 0,
+                        online: "Servidor Apagado"
+                    },
+                    description: null,
+                    favicon: null,
+                    srvRecord: null,
+                    roundTripLatency: null
+                }
             };
         }
-    }
-    return statusJSON
+    });
+    const results = await Promise.all(promises);
+    const statusJSON = results.reduce((acc, val) => ({ ...acc, ...val }), {});
+    return statusJSON;
 }
 async function sendRCONCommand(command, server) {
     const { host, password = 'minecraft' } = servers[server.toLowerCase()];

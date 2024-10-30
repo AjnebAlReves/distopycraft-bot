@@ -98,10 +98,13 @@ const webStatus = {
 };
 async function updateStatusEmbed() {
 	try {
-		console.log('[INFO] Obteniendo el estado del servidor...');
-		const status = await getStatus();
-		if (!status) {
-			console.log('[WARN] No se pudo obtener el estado del servidor');
+		const [status, channel] = await Promise.all([
+			getStatus(),
+			client.channels.fetch(config.bot.channels.status)
+		]);
+
+		if (!status || !channel) {
+			console.log('[WARN] No se pudo obtener el estado del servidor o el canal de estado');
 			return;
 		}
 
@@ -109,30 +112,27 @@ async function updateStatusEmbed() {
 			.setTitle('DistopyCraft')
 			.setURL('https://distopycraft.com')
 			.setTitle('Estado del servidor')
-			.setDescription(`Próxima actualización: <t:${Math.floor(Date.now() / 1000) + 60}:R>\n\n<a:_:1296177196356075682> **Estados de los Servidores [Total: 3]**\n> ${status.proxy.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **Proxy** (${status.proxy.players.online}/${status.proxy.players.max})\n> ${status.lobby_1.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **Lobby #1:** (${status.lobby_1.players.online}/${status.lobby_1.players.max})\n> ${status.survival_1.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **Survival 1.20:** (${status.survival_1.players.online}/${status.survival_1.players.max})\n\n<a:_:1296177196356075682> **Estado de los sitios web [Total: 2]**\n> ${webStatus.forum.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Foro**](https://distopycraft.com)\n> ${webStatus.store.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Tienda**](https://tienda.distopycraft.com)`)
+			.setDescription(`Próxima actualización: <t:${Math.floor(Date.now() / 1000) + 60}:R>
+			
+			<a:_:1296177196356075682> **Estados de los Servidores [Total: ${Object.keys(status).length}]**
+			${Object.entries(status).map(([name, server]) => `> ${server.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **${name.charAt(0).toUpperCase() + name.slice(1)}:** (${server.players.online}/${server.players.max})`).join('\n')}			
+			
+			<a:_:1296177196356075682> **Estado de los sitios web [Total: 2]**
+			> ${webStatus.forum.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Foro**](https://distopycraft.com)
+			> ${webStatus.store.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Tienda**](https://tienda.distopycraft.com)`)
 			.setImage(`https://api.mcstatus.io/v2/widget/java/mc.distopycraft.com?${Math.random() * 10000000}`)
 			.setFooter({ text: 'DistopyCraft | Se actualiza cada 1 minuto | Última Actualización', iconURL: client.user.displayAvatarURL({ dynamic: true }) })
 			.setColor('DarkRed')
 			.setTimestamp();
 
-		console.log('[INFO] Obteniendo el canal de estado...');
-		const channel = await client.channels.fetch(config.bot.channels.status);
-		console.log(`[INFO] Canal de estado obtenido: #${channel.name}`);
-
-		console.log('[INFO] Obteniendo mensajes del canal...');
-		const message = await channel.messages.fetch({limit: 3})
-			.then(messages => {
-				return messages.first();
-			})
+		const message = await channel.messages.fetch({ limit: 3 })
+			.then(messages => messages.first())
 			.catch(console.error);
 
 		if (!message) {
-			console.log('[INFO] No se encontró ningún mensaje del bot en el canal de estado. Creando uno nuevo...');
-			channel.send({ embeds: [embed] });
+			await channel.send({ embeds: [embed] });
 		} else {
-			console.log('[INFO] Actualizando el mensaje del bot en el canal de estado...');
-			message.edit({ embeds: [embed] });
-			console.log('[INFO] Mensaje de estado actualizado.');
+			await message.edit({ embeds: [embed] });
 		}
 
 	} catch (error) {
