@@ -1,7 +1,3 @@
-const { EmbedBuilder } = require('discord.js');
-const axios = require('axios');
-const userDB = require('../data/database/users.json');
-const protocol = require('minecraft-protocol');
 const util = require('minecraft-server-util');
 const { minecraft } = require('../data/config');
 const servers = minecraft;
@@ -58,18 +54,31 @@ async function getMainServerPing() {
         timeout: 1000 * 5, // timeout in milliseconds
         enableSRV: true // SRV record lookup
     };
+    const server = 'mc.distopycraft.com';
     try {
-    const status = await util.status('mc.distopycraft.com', 25565, options);
-        response = {
-            ping: status.roundTripLatency,
-            online: true
-        }
+        const status = await util.status(server, 25565, options);
+        return {
+            [server]: {
+                ping: status.roundTripLatency,
+                players: {
+                    max: status.players.max,
+                    online: status.players.online
+                },
+                online: true
+            }
+        };
     } catch (err) {
         console.error(err);
-        response = {
-            ping: null,
-            online: false
-        }
+        return {
+            [server]: {
+                online: false,
+                players: {
+                    max: 0,
+                    online: "Servidor Apagado"
+                },
+                roundTripLatency: "999+ ms"
+            }
+        };
     }
 }
 module.exports = { getStatus, sendRCONCommand };
