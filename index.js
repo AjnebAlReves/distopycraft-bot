@@ -4,7 +4,6 @@ const { Client, Collection, GatewayIntentBits, Partials, EmbedBuilder } = requir
 const config = require('./data/config');
 const discord_player = require('discord-player');
 const { getStatus } = require('./functions/minecraft');
-const { time } = require('node:console');
 
 const token = config.bot.token;
 require('dotenv').config();
