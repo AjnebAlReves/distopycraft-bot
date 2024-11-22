@@ -5,6 +5,11 @@
     "options": []
   },
   {
+    "name": "canvas_testing",
+    "description": "Genera una tarjeta de bienvenida.",
+    "options": []
+  },
+  {
     "name": "rcon",
     "description": "Ejecuta comandos RCON en el servidor de juego.",
     "options": [

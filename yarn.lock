@@ -7,7 +7,7 @@
   resolved "https://registry.npmjs.org/@discord-player/equalizer/-/equalizer-0.2.3.tgz"
   integrity sha512-71UAepYMbHTg2QQLXQAgyuXYHrgAYpJDxjg9dRWfTUNf+zfOAlyJEiRRk/WFhQyGu6m23iLR/H/JxgF4AW8Csg==
 
-"@discord-player/extractor@^4.5.0", "@discord-player/extractor@4.5.1":
+"@discord-player/extractor@4.5.1":
   version "4.5.1"
   resolved "https://registry.npmjs.org/@discord-player/extractor/-/extractor-4.5.1.tgz"
   integrity sha512-krsgdHD7sx4SWHKkIFDPcgYXR21EfleW0bjI6WvnJQbvTg9TZ4aYw77G6UVw/HaF7i3u3WuyGPZp1UqG0FRHaw==
@@ -51,17 +51,12 @@
     ts-mixer "^6.0.4"
     tslib "^2.6.3"
 
-"@discordjs/collection@^1.1.0", "@discordjs/collection@1.5.3":
+"@discordjs/collection@1.5.3", "@discordjs/collection@^1.1.0":
   version "1.5.3"
   resolved "https://registry.npmjs.org/@discordjs/collection/-/collection-1.5.3.tgz"
   integrity sha512-SVb428OMd3WO1paV3rm6tSjM4wC+Kecaa1EUGX7vc6/fddvw/6lg90z4QtCqm21zvVe92vMMDt9+DkIvjXImQQ==
 
-"@discordjs/collection@^2.1.0":
-  version "2.1.1"
-  resolved "https://registry.npmjs.org/@discordjs/collection/-/collection-2.1.1.tgz"
-  integrity sha512-LiSusze9Tc7qF03sLCujF5iZp7K+vRNEDBZ86FT9aQAv3vxMLihUvKvpsCWiQ2DJq1tVckopKm1rxomgNUc9hg==
-
-"@discordjs/collection@^2.1.1":
+"@discordjs/collection@^2.1.0", "@discordjs/collection@^2.1.1":
   version "2.1.1"
   resolved "https://registry.npmjs.org/@discordjs/collection/-/collection-2.1.1.tgz"
   integrity sha512-LiSusze9Tc7qF03sLCujF5iZp7K+vRNEDBZ86FT9aQAv3vxMLihUvKvpsCWiQ2DJq1tVckopKm1rxomgNUc9hg==
@@ -88,7 +83,7 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
-"@discordjs/opus@>=0.8.0 <1.0.0", "@discordjs/opus@0.9.0":
+"@discordjs/opus@0.9.0":
   version "0.9.0"
   resolved "https://registry.npmjs.org/@discordjs/opus/-/opus-0.9.0.tgz"
   integrity sha512-NEE76A96FtQ5YuoAVlOlB3ryMPrkXbUCTQICHGKb8ShtjXyubGicjRMouHtP1RpuDdm16cDa+oI3aAMo1zQRUQ==
@@ -116,16 +111,16 @@
   resolved "https://registry.npmjs.org/@discordjs/util/-/util-1.1.1.tgz"
   integrity sha512-eddz6UnOBEB1oITPinyrB2Pttej49M9FZQY8NxgEvc3tq6ZICZ19m70RsmzRdDHk80O9NoYN/25AqJl8vPVf/g==
 
-"@discordjs/voice@0.17.0":
-  version "0.17.0"
-  resolved "https://registry.npmjs.org/@discordjs/voice/-/voice-0.17.0.tgz"
-  integrity sha512-hArn9FF5ZYi1IkxdJEVnJi+OxlwLV0NJYWpKXsmNOojtGtAZHxmsELA+MZlu2KW1F/K1/nt7lFOfcMXNYweq9w==
+"@discordjs/voice@0.18.0":
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/@discordjs/voice/-/voice-0.18.0.tgz#8fb1f1c46fb19a26bdff7d7c4e609b25cb46b1ba"
+  integrity sha512-BvX6+VJE5/vhD9azV9vrZEt9hL1G+GlOdsQaVl5iv9n87fkXjf3cSwllhR3GdaUC8m6dqT8umXIWtn3yCu4afg==
   dependencies:
-    "@types/ws" "^8.5.10"
-    discord-api-types "0.37.83"
+    "@types/ws" "^8.5.12"
+    discord-api-types "^0.37.103"
     prism-media "^1.3.5"
-    tslib "^2.6.2"
-    ws "^8.16.0"
+    tslib "^2.6.3"
+    ws "^8.18.0"
 
 "@discordjs/ws@1.1.1":
   version "1.1.1"
@@ -142,25 +137,65 @@
     tslib "^2.6.2"
     ws "^8.16.0"
 
-"@napi-rs/canvas-linux-x64-gnu@0.1.60":
-  version "0.1.60"
-  resolved "https://registry.npmjs.org/@napi-rs/canvas-linux-x64-gnu/-/canvas-linux-x64-gnu-0.1.60.tgz"
-  integrity sha512-46yi+fIUQ5SRg0Qs3L04zh67kk0uFJa2elWt/cS/7kEydu06uhjbJwW3123J9KShu2PKLlaZEqxJPksYpowoeA==
+"@napi-rs/canvas-android-arm64@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-android-arm64/-/canvas-android-arm64-0.1.62.tgz#a32331cf5bb6be6f39c6074308ab7745ecff3127"
+  integrity sha512-gilURMgNfCqXQmw211Jo6BiaQpPS7RD5baKWgnQ17XbgpJPi8+DFtbdIzQsCiFWl6p2TfXpg3cqWfN0fm+blRw==
 
-"@napi-rs/canvas@^0.1.60":
-  version "0.1.60"
-  resolved "https://registry.npmjs.org/@napi-rs/canvas/-/canvas-0.1.60.tgz"
-  integrity sha512-2a/8ynCHVXu9JVTeT/RLrZy6kro3VHnxDqy7SyHIdzCUUwJoKuKNmDzXjD6bqE0W/07j1lFW7OVIAYSr1GiWuA==
+"@napi-rs/canvas-darwin-arm64@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-darwin-arm64/-/canvas-darwin-arm64-0.1.62.tgz#60e71519acdfb40a773561483bb8ca051c5c083c"
+  integrity sha512-TodBo7kdMEeGsGa80/BTJwyG9od+AMGDFe6UW7jkU8uEJmzOROVp6Y2Ka6LfLixpEGwNUCEFEUabr/gETD7bhg==
+
+"@napi-rs/canvas-darwin-x64@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-darwin-x64/-/canvas-darwin-x64-0.1.62.tgz#4f80d9097a75c2491bdafb17d5f750c6f789d506"
+  integrity sha512-1SqtF7HbLh1XwxUhpkIZg2huG25UHkOvjMKh+GksARs4RiKFC7/jPnPyj3KtmkejyA6zsuqFd49qeJ3StJr4hQ==
+
+"@napi-rs/canvas-linux-arm-gnueabihf@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-linux-arm-gnueabihf/-/canvas-linux-arm-gnueabihf-0.1.62.tgz#5729a3fee706b96d1b7d8d31bec4911804772869"
+  integrity sha512-L5Gp6sKyXV0KXw9V/Cy4DlouL/Wz+D5P14XsRQLlSnTXKVHSBEufZBopsbdjBu0XZTp5rAGWsdnACDzwMSsi+A==
+
+"@napi-rs/canvas-linux-arm64-gnu@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-linux-arm64-gnu/-/canvas-linux-arm64-gnu-0.1.62.tgz#0a12ea97b75371f7433e686f3ee0241bb8d916c6"
+  integrity sha512-uiyeg4TFSf+SVOlM5pIh8a4oNEUAgL+KoCm6Qvpm8XhBmIpVrCpPShp0eje/zuaMCJtzFkenkbwOapW/blCCVQ==
+
+"@napi-rs/canvas-linux-arm64-musl@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-linux-arm64-musl/-/canvas-linux-arm64-musl-0.1.62.tgz#22d1ef715b4df8babe4df1b42743ee5870d6141f"
+  integrity sha512-diZxX37Fs/Tn2m4UDhzVxAxu0rHtis8EImamcrL+KNDSjCiEe/h0r+Gfh7wNxRv9REh10UP+zlD8PTrcSKjL3g==
+
+"@napi-rs/canvas-linux-x64-gnu@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-linux-x64-gnu/-/canvas-linux-x64-gnu-0.1.62.tgz#b06db4822bc1b9e54778fc8a2abd50cc2754921e"
+  integrity sha512-nv0is/DH05kfREHD+62ienlb45Fi3kcvHKwmsHzSrvqNu0l6CFj8h8CuRvhB3tl1KStHZFDxUAqu14MecuK6eA==
+
+"@napi-rs/canvas-linux-x64-musl@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-linux-x64-musl/-/canvas-linux-x64-musl-0.1.62.tgz#c8f2b0d3f789cba601ea067b21d23665e5fc08ad"
+  integrity sha512-r8tT3k67xN5KhPTEn2KPYZ4iEGTcE6b3+ahPpYBGhKRZfZkMdvzHnmuzcSLkjh8bBlkoiObSBK/G8oY7Q335RA==
+
+"@napi-rs/canvas-win32-x64-msvc@0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas-win32-x64-msvc/-/canvas-win32-x64-msvc-0.1.62.tgz#f4a4e8f12e2c84dd2c2f51935a736dad61b08f64"
+  integrity sha512-uQdYrjHu6QfGFxD2K9qzomOzygC8Px5dy4v/PgwBSPCd0ShIjGrIGAY5YobjH2xwEtYEPL9KgJkGe3ts+k5Auw==
+
+"@napi-rs/canvas@^0.1.62":
+  version "0.1.62"
+  resolved "https://registry.yarnpkg.com/@napi-rs/canvas/-/canvas-0.1.62.tgz#4abd2acee746976cf6f7ce396b6bce17be3b1298"
+  integrity sha512-+aqi0evK3ohAG3pFhMhM5C6y26foMUK0C1c3dfC1p/CRETwAuQlobuFGxadHkyIgc9mVyfGTpZUCnlrzt6xSwg==
   optionalDependencies:
-    "@napi-rs/canvas-android-arm64" "0.1.60"
-    "@napi-rs/canvas-darwin-arm64" "0.1.60"
-    "@napi-rs/canvas-darwin-x64" "0.1.60"
-    "@napi-rs/canvas-linux-arm-gnueabihf" "0.1.60"
-    "@napi-rs/canvas-linux-arm64-gnu" "0.1.60"
-    "@napi-rs/canvas-linux-arm64-musl" "0.1.60"
-    "@napi-rs/canvas-linux-x64-gnu" "0.1.60"
-    "@napi-rs/canvas-linux-x64-musl" "0.1.60"
-    "@napi-rs/canvas-win32-x64-msvc" "0.1.60"
+    "@napi-rs/canvas-android-arm64" "0.1.62"
+    "@napi-rs/canvas-darwin-arm64" "0.1.62"
+    "@napi-rs/canvas-darwin-x64" "0.1.62"
+    "@napi-rs/canvas-linux-arm-gnueabihf" "0.1.62"
+    "@napi-rs/canvas-linux-arm64-gnu" "0.1.62"
+    "@napi-rs/canvas-linux-arm64-musl" "0.1.62"
+    "@napi-rs/canvas-linux-x64-gnu" "0.1.62"
+    "@napi-rs/canvas-linux-x64-musl" "0.1.62"
+    "@napi-rs/canvas-win32-x64-msvc" "0.1.62"
 
 "@sapphire/async-queue@^1.5.2", "@sapphire/async-queue@^1.5.3":
   version "1.5.3"
@@ -175,7 +210,7 @@
     fast-deep-equal "^3.1.3"
     lodash "^4.17.21"
 
-"@sapphire/snowflake@^3.5.3", "@sapphire/snowflake@3.5.3":
+"@sapphire/snowflake@3.5.3", "@sapphire/snowflake@^3.5.3":
   version "3.5.3"
   resolved "https://registry.npmjs.org/@sapphire/snowflake/-/snowflake-3.5.3.tgz"
   integrity sha512-jjmJywLAFoWeBi1W7994zZyiNWPIiqRRNAmSERxyg93xRGzNYvGjlZ0gR6x0F4gPRi2+0O6S71kOZYyr3cxaIQ==
@@ -211,6 +246,13 @@
   version "8.5.12"
   resolved "https://registry.npmjs.org/@types/ws/-/ws-8.5.12.tgz"
   integrity sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==
+  dependencies:
+    "@types/node" "*"
+
+"@types/ws@^8.5.12":
+  version "8.5.13"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.13.tgz#6414c280875e2691d0d1e080b05addbf5cb91e20"
+  integrity sha512-osM/gWBTPKgHV8XkTunnegTRIsvF6owmf5w+JtAfOw472dptdm0dlGv4xCt6GwQRcC2XVOvvRE/0bAoQcL2QkA==
   dependencies:
     "@types/node" "*"
 
@@ -370,15 +412,15 @@ detect-libc@^2.0.0:
   resolved "https://registry.npmjs.org/detect-libc/-/detect-libc-2.0.3.tgz"
   integrity sha512-bwy0MGW55bG41VqxxypOsdSdGqLwXPI/focwgTYCFMbdUiBAxLg9CFzG08sz2aqzknwiX7Hkl0bQENjg8iLByw==
 
-discord-api-types@^0.37.50, discord-api-types@0.37.104:
-  version "0.37.104"
-  resolved "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.37.104.tgz"
-  integrity sha512-kIX9RXGekag1Yd/R/douqBTRyt5GY5mCoxntKLuyqfYpKQ1fl8XpHNFIMtnoDSD343TJWsah49XylrsNFfTu0Q==
-
 discord-api-types@0.37.100:
   version "0.37.100"
   resolved "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.37.100.tgz"
   integrity sha512-a8zvUI0GYYwDtScfRd/TtaNBDTXwP5DiDVX7K5OmE+DRT57gBqKnwtOC5Ol8z0mRW8KQfETIgiB8U0YZ9NXiCA==
+
+discord-api-types@0.37.105, discord-api-types@^0.37.103:
+  version "0.37.105"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.37.105.tgz#d9c2f7adc6ea08f58d37b82099c9b6d85bc6ca1f"
+  integrity sha512-TSNlLF5Q9vFLMeHjYskhmDj/zCQ4dFA+OLxQrHUypGW48gt8ttGaB+opCD9w3Zkq1otyoBoetrwaoDFZAFuGng==
 
 discord-api-types@0.37.83:
   version "0.37.83"
@@ -389,6 +431,11 @@ discord-api-types@0.37.97:
   version "0.37.97"
   resolved "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.37.97.tgz"
   integrity sha512-No1BXPcVkyVD4ZVmbNgDKaBoqgeQ+FJpzZ8wqHkfmBnTZig1FcH3iPPersiK1TUIAzgClh2IvOuVUYfcWLQAOA==
+
+discord-api-types@^0.37.50:
+  version "0.37.104"
+  resolved "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.37.104.tgz"
+  integrity sha512-kIX9RXGekag1Yd/R/douqBTRyt5GY5mCoxntKLuyqfYpKQ1fl8XpHNFIMtnoDSD343TJWsah49XylrsNFfTu0Q==
 
 discord-player@6.7.1:
   version "6.7.1"
@@ -483,7 +530,7 @@ event-target-shim@^5.0.0:
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
-fast-deep-equal@^3.1.3, fast-deep-equal@3.1.3:
+fast-deep-equal@3.1.3, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
@@ -629,7 +676,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@^2.0.3, inherits@2:
+inherits@2, inherits@^2.0.3:
   version "2.0.4"
   resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
@@ -747,7 +794,7 @@ node-addon-api@^5.0.0:
   resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-5.1.0.tgz"
   integrity sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==
 
-node-domexception@^1.0.0, node-domexception@1.0.0:
+node-domexception@1.0.0, node-domexception@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/node-domexception/-/node-domexception-1.0.0.tgz"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
@@ -812,9 +859,9 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
-openai@^4.72.0:
+openai@4.72.0:
   version "4.72.0"
-  resolved "https://registry.npmjs.org/openai/-/openai-4.72.0.tgz"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-4.72.0.tgz#61630553157a0c9bb1c304b1dd4d2f90e9ec4cf7"
   integrity sha512-hFqG9BWCs7L7ifrhJXw7mJXmUBr7d9N6If3J9563o0jfwVA4wFANFDDaOIWFdgDdwgCXg5emf0Q+LoLCGszQYA==
   dependencies:
     "@types/node" "^18.11.18"
@@ -920,13 +967,6 @@ spotify-url-info@^3.2.6:
     himalaya "~1.1.0"
     spotify-uri "~4.1.0"
 
-string_decoder@^1.1.1:
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz"
-  integrity sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==
-  dependencies:
-    safe-buffer "~5.2.0"
-
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
@@ -935,6 +975,13 @@ string_decoder@^1.1.1:
     emoji-regex "^8.0.0"
     is-fullwidth-code-point "^3.0.0"
     strip-ansi "^6.0.1"
+
+string_decoder@^1.1.1:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz"
+  integrity sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==
+  dependencies:
+    safe-buffer "~5.2.0"
 
 strip-ansi@^6.0.1:
   version "6.0.1"
@@ -996,7 +1043,7 @@ undici-types@~6.19.2:
   resolved "https://registry.npmjs.org/undici-types/-/undici-types-6.19.8.tgz"
   integrity sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==
 
-undici@^6.11.1, undici@^6.17.0, undici@6.19.8:
+undici@6.19.8, undici@^6.11.1, undici@^6.17.0:
   version "6.19.8"
   resolved "https://registry.npmjs.org/undici/-/undici-6.19.8.tgz"
   integrity sha512-U8uCCl2x9TK3WANvmBavymRzxbfFYG+tAu+fgx3zxQy3qdagQqBLwJVrdyO1TBfUXvfKveMKJZhpvUYoOjM+4g==
@@ -1011,15 +1058,15 @@ util-deprecate@^1.0.1:
   resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
-web-streams-polyfill@^3.0.3:
-  version "3.3.3"
-  resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz"
-  integrity sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==
-
 web-streams-polyfill@4.0.0-beta.3:
   version "4.0.0-beta.3"
   resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-4.0.0-beta.3.tgz"
   integrity sha512-QW95TCTaHmsYfHDybGMwO5IJIM93I/6vTRk+daHTWFPhwh+C8Cg7j7XyKrwrj8Ib6vYXe0ocYNrmzY4xAAN6ug==
+
+web-streams-polyfill@^3.0.3:
+  version "3.3.3"
+  resolved "https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz"
+  integrity sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
@@ -1046,9 +1093,9 @@ wrappy@1:
   resolved "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
 
-ws@^8.13.0, ws@^8.16.0:
+ws@^8.13.0, ws@^8.16.0, ws@^8.18.0:
   version "8.18.0"
-  resolved "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.0.tgz#0d7505a6eafe2b0e712d232b42279f53bc289bbc"
   integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
 
 yallist@^4.0.0:

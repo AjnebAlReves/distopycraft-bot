@@ -8,26 +8,20 @@ module.exports = {
   async execute(member) {
     console.log(`[INFO] ${member.user.username} se ha unido a ${member.guild.name}`);
     const messageList = [
-      `¡Qué onda, <@${member.user.id}>! Bienvenido a la fiesta de DistopyCraft. ¡Prepárate para el desmadre pixelado!`,
-      `¡Epa, <@${member.user.id}>! Acabas de caer en el agujero de conejo de DistopyCraft. ¡Agárrate que nos vamos!`,
-      `¡Yooo, <@${member.user.id}>! Bienvenido al club más cool de Minecraft. Aquí hasta los creepers son hipsters.`,
-      `¡Qué pex, <@${member.user.id}>! Bienvenido a DistopyCraft, donde los diamantes son los nuevos likes.`,
-      `¡Wasaaa, <@${member.user.id}>! Acabas de entrar al servidor más loco del multiverso Minecraft.`,
-      `¡Ey, <@${member.user.id}>! Bienvenido a DistopyCraft. Aquí minamos como pros y construimos como bobos.`,
-      `¡Qué tranza, <@${member.user.id}>! Bienvenido al único lugar donde puedes ser un arquitecto, minero y granjero... todo antes del desayuno.`,
-      `¡Órale, <@${member.user.id}>! Bienvenido a DistopyCraft, donde los creepers explotan de risa con nuestros chistes malos.`,
-      `¡Qué show, <@${member.user.id}>! Acabas de spawnearte en el servidor más chido. ¡No olvides traer tus memes!`,
-      `¡Holi boli, <@${member.user.id}>! Bienvenido a DistopyCraft, donde hasta los endermans bailan la macarena.`,
-      `¡Qué pachuca por Toluca, <@${member.user.id}>! Bienvenido al único lugar donde puedes construir un castillo de dirt y llamarlo arte moderno.`,
-      `¡Eh, tú, <@${member.user.id}>! Sí, tú. Bienvenido a DistopyCraft. Prepárate para perder el sueño y ganar amigos pixelados.`,
-      `¡Qué jais, <@${member.user.id}>! Bienvenido al servidor donde los zombies tienen más swag que tú.`,
-      `¡Arre, <@${member.user.id}>! Bienvenido a DistopyCraft, donde minamos diamantes y cultivamos memes.`,
-      `¡Qué rollo con el pollo, <@${member.user.id}>! Bienvenido a DistopyCraft, el único lugar donde puedes ser un noob con estilo.`,
-      `¡Quihúboles, <@${member.user.id}>! Bienvenido a DistopyCraft, donde hasta los slimes tienen flow.`,
-      `¡Qué pedo, <@${member.user.id}>! (Perdón, fue el Ghast). Bienvenido a DistopyCraft, hogar de los mejores constructores y los peores chistes.`,
-      `¡Epa epa, <@${member.user.id}>! Bienvenido a DistopyCraft. Aquí los creepers son más amigables que tu ex.`,
-      `¡Qué onda, mi buen <@${member.user.id}>! Bienvenido a DistopyCraft, donde puedes ser un rey, un vagabundo, o ambos... nadie juzga.`,
-      `¡Qué tranza, valedor <@${member.user.id}>! Bienvenido a DistopyCraft. Prepara tus dedos para clickear más rápido que Sonic corriendo.`
+      `Bienvenid@ a DistopyCraft, <@${member.user.id}>! Las reglas del servidor las encuentras en <#${config.bot.channels.rules}>`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! La IP es mc.distopycraft.com`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Por favor lee las reglas del servidor antes de hablar en el chat general.`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Si tienes alguna duda, pregunta en el canal de <#${config.bot.channels.general}>`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Si quieres hablar con nuestra IA, pregunta en el canal de <#${config.bot.channels.ai}>`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Si quieres sugerir una mejora, pregunta en el canal de <#${config.bot.channels.suggestions}>`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Si quieres reportar un bug, pregunta en el canal de <#${config.bot.channels.bugs}>`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Si quieres hablar con nuestro staff, pregunta en el canal de <#${config.bot.channels.tickets}>`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Soy un bot equipado con IA. Puedes charlar con el comando /ai o en el canal de <#${config.bot.channels.ai}>`,
+      `¡Hola, <@${member.user.id}>! Soy un bot equipado con IA. Puedes charlar con el comando /ai o en el canal de <#${config.bot.channels.ai}>`,
+      `¡Hola, <@${member.user.id}>! Ya no tuve ideas para saludar. ¡Bienvenid@ a DistopyCraft!`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Soy un bot Open-Source. Puedes ver mi código en https://github.com/AjnebAlReves/distopycraft-bot`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Los comandos de música no funcionan. Sí sabes programar, puedes contribuir al proyecto en https://github.com/AjnebAlReves/distopycraft-bot`,
+      `¡Bienvenid@ a DistopyCraft, <@${member.user.id}>! Sí te gusta el servidor, puedes votar. Usa el comando /vote en el canal de <#${config.bot.channels.commands}>`,
     ];
 
     const welcomeChannel = member.guild.channels.cache.get(config.bot.channels.welcome);

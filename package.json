@@ -10,14 +10,14 @@
   "dependencies": {
     "@discord-player/extractor": "4.5.1",
     "@discordjs/opus": "0.9.0",
-    "@discordjs/voice": "0.17.0",
-    "@napi-rs/canvas": "^0.1.60",
+    "@discordjs/voice": "0.18.0",
+    "@napi-rs/canvas": "^0.1.62",
     "axios": "1.7.7",
-    "discord-api-types": "0.37.104",
+    "discord-api-types": "0.37.105",
     "discord-player": "6.7.1",
     "discord.js": "14.16.3",
     "dotenv": "16.4.5",
     "minecraft-server-util": "5.4.4",
-    "openai": "^4.72.0"
+    "openai": "4.72.0"
   }
 }
