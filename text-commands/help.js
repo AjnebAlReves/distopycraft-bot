@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-const categories = require('../data/categories.json')
+const categories = require('../data/categories.json');
 
 module.exports = {
     name: 'help',
@@ -13,19 +13,16 @@ module.exports = {
             .setTitle('Lista de comandos')
             .setDescription('Estos son los comandos disponibles:');
 
-        const commands = fs.readdirSync('./text-commands')
-            .filter(file => file.endsWith('.js'))
-            .map(file => require(`./${file}`));
+        const commandsPath = path.join(__dirname);
+        const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+        const commands = commandFiles.map(file => require(path.join(commandsPath, file)));
 
         for (const category in categories) {
             const categoryCommands = commands.filter(cmd => cmd.category === category);
             if (categoryCommands.length > 0) {
                 embed.addFields({
                     name: `${categories[category]}`,
-                    value: categoryCommands.map(cmd => 
-                        `**${cmd.aliases ? `!${cmd.name}, !${cmd.aliases.join(', !')}` : `!${cmd.name}`}**
-> ${cmd.description}`
-                    ).join('\n')
+                    value: categoryCommands.map(cmd => `\`${cmd.name}\``).join(', ')
                 });
             }
         }

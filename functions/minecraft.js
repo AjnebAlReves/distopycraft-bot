@@ -81,4 +81,4 @@ async function getMainServerPing() {
         };
     }
 }
-module.exports = { getStatus, sendRCONCommand };
+module.exports = { getStatus, sendRCONCommand, getMainServerPing};

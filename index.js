@@ -69,6 +69,20 @@ for (const folder of commandFolders) {
 	}
 }
 
+const textCommandsPath = path.join(__dirname, 'text-commands');
+const textCommandFiles = fs.readdirSync(textCommandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of textCommandFiles) {
+	const filePath = path.join(textCommandsPath, file);
+	const command = require(filePath);
+	if ('name' in command && 'execute' in command) {
+		client.commands.set(command.name, command);
+		console.log(`[INFO] Comando de texto registrado: ${config.bot.prefix}${command.name}`);
+	} else {
+		console.log(`[WARN] Al comando de texto ubicado en ${filePath} le falta una propiedad requerida "name" o "execute". Sin una de ellas, el comando no se podrá ejecutar`);
+	}
+}
+
 const eventsPath = path.join(__dirname, 'events/discord');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -113,7 +127,7 @@ async function updateStatusEmbed() {
 			.setTitle('Estado del servidor')
 			.setDescription(`Próxima actualización: <t:${Math.floor(Date.now() / 1000) + 60}:R>
 			
-			<a:_:1296177196356075682> **Estados de los Servidores [Total: ${Object.keys(status).length}]**
+			<a:_:1296177196356075682> **Estados de los Servidores [Total: ${Object.keys(status).length - 1}]**
 			${Object.entries(status).filter(([name]) => name !== 'main').map(([name, server]) => `> ${server.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **${name.charAt(0).toUpperCase() + name.slice(1)}:** (${server.players.online}/${server.players.max})`).join('\n')}			
 			
 			<a:_:1296177196356075682> **Estado de los sitios web [Total: 2]**
