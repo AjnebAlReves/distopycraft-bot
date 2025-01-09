@@ -87,7 +87,7 @@ const webStatus = {
 	forum: {
 		name: 'Foro',
 		url: 'https://distopycraft.com',
-		online: true
+		online: false
 	},
 	store: {
 		name: 'Tienda',
@@ -114,7 +114,7 @@ async function updateStatusEmbed() {
 			.setDescription(`Próxima actualización: <t:${Math.floor(Date.now() / 1000) + 60}:R>
 			
 			<a:_:1296177196356075682> **Estados de los Servidores [Total: ${Object.keys(status).length}]**
-			${Object.entries(status).map(([name, server]) => `> ${server.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **${name.charAt(0).toUpperCase() + name.slice(1)}:** (${server.players.online}/${server.players.max})`).join('\n')}			
+			${Object.entries(status).filter(([name]) => name !== 'main').map(([name, server]) => `> ${server.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} **${name.charAt(0).toUpperCase() + name.slice(1)}:** (${server.players.online}/${server.players.max})`).join('\n')}			
 			
 			<a:_:1296177196356075682> **Estado de los sitios web [Total: 2]**
 			> ${webStatus.forum.online ? '<a:_:1295838056158462115>' : '<a:_:1296175684208820294>'} [**Foro**](https://distopycraft.com)

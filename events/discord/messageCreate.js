@@ -63,6 +63,16 @@ module.exports = {
 				message.react('👍');
 				message.react('👎');
 			});
+		} else {
+			const textCommandsPath = path.join(__dirname, '../../text-commands');
+			const textCommandFiles = fs.readdirSync(textCommandsPath).filter(file => file.endsWith('.js'));
+			
+			for (const file of textCommandFiles) {
+				const command = require(path.join(textCommandsPath, file));
+				if (messageContent.toLowerCase().startsWith('!' + command.name) || (command.aliases && command.aliases.some(alias => messageContent.toLowerCase().startsWith('!' + alias)))) {
+					command.execute(message);
+					return;
+				}
+			}
 		}
-	}
-};
+	}};

@@ -1,7 +1,9 @@
 const config = require("../../data/config");
 const axios = require("axios");
+const fs = require("fs");
 const { Events, EmbedBuilder, AttachmentBuilder } = require("discord.js");
 const Canvas = require("@napi-rs/canvas");
+const path = require("path");
 module.exports = {
   name: Events.GuildMemberAdd,
   once: true,
@@ -33,7 +35,11 @@ module.exports = {
     const ctx = canvas.getContext('2d');
 
     // Background color
-    const background = loadImage('../../data/welcome.png')
+    const background = Canvas.loadImage(path.join(__dirname, '..', '..', 'data', 'welcome.png'), {
+      width: canvas.width,
+      height: canvas.height
+  
+    });
     background.then(() => {
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     }).catch(err => {
