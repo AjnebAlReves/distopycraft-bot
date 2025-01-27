@@ -1,5 +1,4 @@
 const { Events, ActivityType } = require('discord.js');
-const axios = require('axios');
 const fs = require('node:fs');
 const path = require('node:path');
 const config = require('../../data/config.js');
@@ -16,6 +15,11 @@ module.exports = {
     const rest = new REST().setToken(token);
 
     console.log(`[INFO] Sesión iniciada como ${client.user.tag}`);
+
+    client.user.setPresence({
+      activities: [{ name: 'DistopyCraft' }],
+      status: 'idle',
+    });
 
     const commands = [];
     const foldersPath = path.join(__dirname, '../../commands');

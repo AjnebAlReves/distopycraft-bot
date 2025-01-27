@@ -30,7 +30,7 @@ module.exports = {
         ephemeral: true,
       });
     }
-    if (!executor.id === "829540683739299882") {
+    if (!executor.id === client.user.ownerId) {
       return interaction.reply({
         content: "No tienes permisos para ejecutar este comando.",
         ephemeral: true,

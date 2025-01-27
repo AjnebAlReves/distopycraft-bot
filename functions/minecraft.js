@@ -2,13 +2,12 @@ const util = require('minecraft-server-util');
 const { minecraft } = require('../data/config');
 const servers = minecraft;
 async function getStatus() {
-    const options = {
-        timeout: 1000 * 5, // timeout in milliseconds
-        enableSRV: true // SRV record lookup
-    };
     const promises = Object.keys(servers).map(async (server) => {
         try {
-            const status = await util.status(servers[server].host, 25565, options);
+            const status = await util.status(servers[server].ip, servers[server].port || 25565, {
+                timeout: 5000,
+                enableSRV: true
+            });
             return {
                 [server]: {
                     ...status,
@@ -49,36 +48,5 @@ async function sendRCONCommand(command, server) {
     await rClient.close();
     return response;
 }
-async function getMainServerPing() {
-    const options = {
-        timeout: 1000 * 5, // timeout in milliseconds
-        enableSRV: true // SRV record lookup
-    };
-    const server = 'mc.distopycraft.com';
-    try {
-        const status = await util.status(server, 25565, options);
-        return {
-            [server]: {
-                ping: status.roundTripLatency,
-                players: {
-                    max: status.players.max,
-                    online: status.players.online
-                },
-                online: true
-            }
-        };
-    } catch (err) {
-        console.error(err);
-        return {
-            [server]: {
-                online: false,
-                players: {
-                    max: 0,
-                    online: "Servidor Apagado"
-                },
-                roundTripLatency: "999+ ms"
-            }
-        };
-    }
-}
-module.exports = { getStatus, sendRCONCommand, getMainServerPing};
+
+module.exports = { getStatus, sendRCONCommand};

@@ -8,16 +8,16 @@
     "dev": "nodemon index.js /dev"
   },
   "dependencies": {
-    "@discord-player/extractor": "4.5.1",
+    "@discord-player/extractor": "7.0.0",
     "@discordjs/opus": "0.9.0",
     "@discordjs/voice": "0.18.0",
-    "@napi-rs/canvas": "^0.1.62",
-    "axios": "1.7.7",
-    "discord-api-types": "0.37.105",
-    "discord-player": "6.7.1",
-    "discord.js": "14.16.3",
-    "dotenv": "16.4.5",
+    "axios": "1.7.9",
+    "canvas": "^3.0.1",
+    "discord-api-types": "0.37.115",
+    "discord-player": "7.0.0",
+    "discord.js": "14.17.3",
+    "dotenv": "16.4.7",
     "minecraft-server-util": "5.4.4",
-    "openai": "4.72.0"
+    "openai": "4.78.0"
   }
 }

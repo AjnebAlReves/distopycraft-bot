@@ -18,7 +18,21 @@ module.exports = {
 			message.channel.sendTyping();
 			const text = await generateAIResponse(prompt, messageAuthor.id);
 			message.reply(text);
-		} else {
+		} else if(message.channel.parentId === config.bot.channels.tickets){
+			const logPath = path.join(__dirname, '..', '..', 'logs', 'tickets.log');
+			const date = new Date();
+			if (messageAuthor.id === message.client.user.id) {
+				logEntry = `${date.toISOString()} - ${message.id} - BOT/AI - ${messageContent}`;
+			} else {
+				logEntry = `${date.toISOString()} - ${message.id} - ${messageAuthor.tag} - ${messageContent}`;
+			}
+			fs.appendFile(logPath, logEntry + '\n', (err) => {
+				if (err) {
+					console.error(err);
+				}
+			});
+
+		} else{
 			const textCommandsPath = path.join(__dirname, '../../text-commands');
 			const textCommandFiles = fs.readdirSync(textCommandsPath).filter(file => file.endsWith('.js'));
 

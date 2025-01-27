@@ -1,8 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, Partials, EmbedBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials, EmbedBuilder, Activity } = require('discord.js');
 const config = require('./data/config');
-const discord_player = require('discord-player');
 const { getStatus } = require('./functions/minecraft');
 
 const token = config.bot.token;
@@ -42,10 +41,6 @@ const client = new Client({
 		repliedUser: true
 	}
 });
-const player = new discord_player.Player(client);
-client.player = player;
-
-player.extractors.loadDefault((ext) => ext !== 'YouTubeExtractor');
 
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
@@ -152,5 +147,29 @@ async function updateStatusEmbed() {
 		console.error('[ERROR] Error al actualizar el embed de estado:', error);
 	}
 }
+const status = config.bot.status;
+const presences = status.presences;
+const ActivityTypes = ['PLAYING', 'STREAMING', 'LISTENING', 'WATCHING', 'COMPETING'];
+const ticketsCategory = client.guilds.cache.get(config.bot.guild)?.channels.cache.find(c => c.id === config.bot.channels.tickets && c.type === 4);
+if (!ticketsCategory) {
+	console.log('[WARN] No se encontró la categoría de tickets');
+	return;
+}
+const ticketsOpen = ticketsCategory.children.cache.size;
+let index = 0;
 
+setInterval(() => {
+	const presence = presences[index];
+	console.log(`[INFO] Cambiando presencia a: [${index}] ${presence.type || 'Indefinido'} - ${presence.name || 'Indefinido'} - ${presence.url || 'Sin URL'}`);
+	client.user.setPresence({
+		activities: [{
+			name: presence.name.replace('%server_online%', '0').replace('%tickets_open%', ticketsOpen),
+			type: ActivityTypes[presence.type],
+			url: presence.url
+		}],
+		status: 'idle',
+	});
+
+	index = (index + 1) % presences.length;
+}, status.autoChangeTime * 1000);
 setInterval(updateStatusEmbed, 1000 * 60);

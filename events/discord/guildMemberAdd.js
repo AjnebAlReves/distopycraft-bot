@@ -2,7 +2,7 @@ const config = require("../../data/config");
 const axios = require("axios");
 const fs = require("fs");
 const { Events, EmbedBuilder, AttachmentBuilder } = require("discord.js");
-const Canvas = require("@napi-rs/canvas");
+const Canvas = require("canvas");
 const path = require("path");
 module.exports = {
   name: Events.GuildMemberAdd,
