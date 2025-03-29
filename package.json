@@ -11,7 +11,7 @@
     "@discord-player/extractor": "7.0.0",
     "@discordjs/opus": "0.9.0",
     "@discordjs/voice": "0.18.0",
-    "axios": "1.7.9",
+    "axios": "1.8.2",
     "canvas": "^3.0.1",
     "discord-api-types": "0.37.115",
     "discord-player": "7.0.0",
